@@ -84,6 +84,13 @@ TEST(PasswordTest, two_different_case)
 	ASSERT_EQ(true, actual);
 }
 
+TEST(PasswordTest, upper_first_different_case)
+{
+	Password my_password;
+	int actual = my_password.has_mixed_case("Aa");
+	ASSERT_EQ(true, actual);
+}
+
 TEST(PasswordTest, two_same_case)
 {
 	Password my_password;
@@ -115,11 +122,11 @@ TEST(PasswordTest, longer_password_case_false)
 TEST(PasswordTest, other_characters_case)
 {
 	Password my_password;
-	int actual = my_password.has_mixed_case("a#ajdieJJJJ))*");
+	int actual = my_password.has_mixed_case("a#ajdleJJJJ))*");
 	ASSERT_EQ(true, actual);
 }
 
-TEST(PasswordTest, other_characters_case_false)
+TEST(PasswordTest, no_caps_other_characters_case)
 {
 	Password my_password;
 	int actual = my_password.has_mixed_case("a#ajdie)*");
@@ -131,4 +138,12 @@ TEST(PasswordTest, empty_password_case)
 	Password my_password;
 	int actual = my_password.has_mixed_case("");
 	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_true_case)
+{
+	Password my_password;
+	my_password.set("blueCanoe");
+	int actual = my_password.authenticate("blueCanoe");
+	ASSERT_EQ(true, actual);
 }
