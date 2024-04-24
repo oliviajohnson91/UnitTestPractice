@@ -147,3 +147,76 @@ TEST(PasswordTest, set_and_auth_true_case)
 	int actual = my_password.authenticate("blueCanoe");
 	ASSERT_EQ(true, actual);
 }
+
+TEST(PasswordTest, set_and_auth_false_case1)
+{
+	Password my_password;
+	my_password.set("bluecanoe");
+	int actual = my_password.authenticate("bluecanoe");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_false_case2)
+{
+	Password my_password;
+	my_password.set("blue");
+	int actual = my_password.authenticate("blue");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_false_case3)
+{
+	Password my_password;
+	my_password.set("Blue");
+	int actual = my_password.authenticate("Blue");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_false_case4)
+{
+	Password my_password;
+	my_password.set("BlueCanoe");
+	my_password.set("purpleCanoe");
+	my_password.set("BlueCanoe");
+	int actual = my_password.authenticate("BlueCanoe");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_false_case5)
+{
+	Password my_password;
+	my_password.set("BBBBlueCanoe");
+	int actual = my_password.authenticate("BBBBlueCanoe");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_false_case6)
+{
+	Password my_password;
+	my_password.set("bbbbluecanoe");
+	int actual = my_password.authenticate("bbbblueCanoe");
+	ASSERT_EQ(false, actual);
+}
+
+TEST(PasswordTest, set_and_auth_false_case7)
+{
+	Password my_password;
+	my_password.set("bbblueCanoe");
+	int actual = my_password.authenticate("bbblueCanoe");
+	ASSERT_EQ(true, actual);
+}
+
+
+TEST(PasswordTest, constructor_auth_case_true)
+{
+	Password my_password;
+	int actual = my_password.authenticate("ChicoCA-95929");
+	ASSERT_EQ(true, actual);
+}
+
+TEST(PasswordTest, constructor_auth_case_false)
+{
+	Password my_password;
+	int actual = my_password.authenticate("NOPE");
+	ASSERT_EQ(false, actual);
+}
